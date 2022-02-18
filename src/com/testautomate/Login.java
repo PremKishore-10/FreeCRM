@@ -21,6 +21,7 @@ public class Login {
 	// String[] monthArr=new String[2];
 	String monthVal;
 	String monthName;
+	String dateyear;
 	int monthYear;
 
 	@BeforeMethod
@@ -52,10 +53,11 @@ public class Login {
 //	}
 
 	@Test(priority = 2)
-	public void calendar() throws InterruptedException {
+	@Parameters({"Date"})
+	public void calendar(String Date) throws InterruptedException {
 		// div[@class='rbc-calendar']//child::span[text()='February 2022']
 
-		String date = "10/October/2020";
+		String date = Date;
 		String dateArr[] = date.split("/");
 		String day = dateArr[0];
 		String month = dateArr[1];
@@ -75,6 +77,7 @@ public class Login {
 		String monthArr[] = monthVal.split(" ");
 		monthName = monthArr[0];
 		monthYear = Integer.parseInt(monthArr[1]);
+		dateyear=monthArr[0]+' '+monthArr[1];
 
 		boolean b = false;
 		
@@ -82,12 +85,12 @@ public class Login {
 
 		while (b == false) {
 
-			while (monthName != month && monthYear!=year) {
+			while (DateYear != dateyear) {
 
 //				System.out.println(monthName);
 
 				driver.findElement(By.xpath("//i[@class='chevron right icon']")).click();
-				Thread.sleep(1000);
+				Thread.sleep(100);
 
 				monthVal = driver
 						.findElement(By.xpath("//*[@id=\"main-content\"]/div/div[2]/div/div[2]/div/div[1]/span[2]"))
@@ -96,7 +99,7 @@ public class Login {
 				String montharr[] = monthVal.split(" ");
 				monthName = montharr[0];
 				monthYear = Integer.parseInt(montharr[1]);
-				String dateyear=montharr[0]+' '+montharr[1];
+				dateyear=montharr[0]+' '+montharr[1];
 				System.out.println(dateyear);
 
 				if (DateYear.equalsIgnoreCase(dateyear)) {
@@ -111,13 +114,13 @@ public class Login {
 		}}else {
 			while (b == false) {
 
-				while (monthName != month && monthYear!=year) {
+				while (DateYear != dateyear) {
 
 //					System.out.println(monthName);
 //					System.out.println("'" + month + "'");
 
 					driver.findElement(By.xpath("//i[@class='chevron left icon']")).click();
-					Thread.sleep(1000);
+					Thread.sleep(100);
 
 					monthVal = driver
 							.findElement(By.xpath("//*[@id=\"main-content\"]/div/div[2]/div/div[2]/div/div[1]/span[2]"))
@@ -126,7 +129,7 @@ public class Login {
 					String montharray[] = monthVal.split(" ");
 					monthName = montharray[0];
 					monthYear = Integer.parseInt(montharray[1]);
-					String dateyear=montharray[0]+' '+montharray[1];
+					dateyear=montharray[0]+' '+montharray[1];
 					System.out.println(dateyear);
 
 					if (DateYear.equalsIgnoreCase(dateyear)) {
