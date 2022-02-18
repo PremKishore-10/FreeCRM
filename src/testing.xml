@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="FreeCRM site Automation Suite">
+
+	<test name="FreeCRM test">
+
+		<parameter name="email" value="premkishore107@gmail.com" />
+		<parameter name="password" value="KishorePK" />
+		<parameter name="contactname" value="John Doe" />
+		<parameter name="editcontact" value="Prem Kishore" />
+
+		<classes>
+			<class name="com.testautomate.Login" />
+		</classes>
+
+	</test>
+
+</suite>
