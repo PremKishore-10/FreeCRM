@@ -9,9 +9,10 @@
 		<parameter name="password" value="KishorePK" />
 		<parameter name="contactname" value="John Doe" />
 		<parameter name="editcontact" value="Prem Kishore" />
+		<parameter name="Date" value="10/October/2024" />
 
 		<classes>
-			<class name="com.testautomate.Login" />
+			<class name="com.test.Login" />
 		</classes>
 
 	</test>
