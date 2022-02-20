@@ -229,4 +229,55 @@ public class Login {
 //		driver.findElement(By.xpath("//button[@class='ui green button']")).click();
 //	}
 
+	@Test(priority=1, dataProvider="getTestData")
+	public void newcontact(String FirstName, String LastName, String Company, String Description, String Position, String Department) throws InterruptedException {
+		Actions action = new Actions(driver);
+
+		action.moveToElement(driver.findElement(By.xpath("//a[@class='item']/following::i[@class='users icon']")))
+				.build().perform();
+		driver.findElement(By.xpath("//a[@class='item']/following::i[@class='users icon']")).click();
+		Thread.sleep(5000);
+		action.moveToElement(driver.findElement(By.xpath("//button[text()='Create']"))).click().build().perform();
+		Thread.sleep(2000);
+		
+		driver.findElement(By.xpath("//label[text()='First Name']/parent::div//child::div//input")).clear();
+		driver.findElement(By.xpath("//label[text()='First Name']/parent::div//child::div//input")).sendKeys(FirstName);
+		Thread.sleep(500);
+		driver.findElement(By.xpath("//label[text()='Last Name']/parent::div//child::div//input")).clear();
+		driver.findElement(By.xpath("//label[text()='Last Name']/parent::div//child::div//input")).sendKeys(LastName);
+		Thread.sleep(500);
+		
+		driver.findElement(By.xpath("//label[text()='Company']/parent::div//child::div//input")).clear();
+		driver.findElement(By.xpath("//label[text()='Company']/parent::div//child::div//input")).sendKeys(Company);
+		Thread.sleep(500);
+		driver.findElement(By.xpath("//label[text()='Description']//following::textarea")).clear();
+		driver.findElement(By.xpath("//label[text()='Description']//following::textarea")).sendKeys(Description);
+		Thread.sleep(500);
+		driver.findElement(By.xpath("//label[text()='Position']/parent::div//child::div//input")).clear();
+		driver.findElement(By.xpath("//label[text()='Position']/parent::div//child::div//input")).sendKeys(Position);
+		Thread.sleep(500);
+		driver.findElement(By.xpath("//label[text()='Department']/parent::div//child::div//input")).clear();
+		driver.findElement(By.xpath("//label[text()='Department']/parent::div//child::div//input")).sendKeys(Department);
+		Thread.sleep(500);
+		driver.findElement(By.xpath("//label[text()='Category']//following::div[@name='category']")).click();
+		driver.findElement(By.xpath("//span[text()='Lead']")).click();
+		Thread.sleep(500);
+		
+		driver.findElement(By.xpath("//button[text()='Save']")).click();
+		Thread.sleep(2000);
+		
+		action.moveToElement(driver.findElement(By.xpath("//a[@class='item']/following::i[@class='users icon']")))
+		.build().perform();
+        driver.findElement(By.xpath("//a[@class='item']/following::i[@class='users icon']")).click();
+
+        Boolean newcontactcheck=driver.findElement(By.xpath("//a[text()='"+FirstName+" "+LastName+"']")).isDisplayed();
+        Assert.assertTrue(newcontactcheck);
+        
+	}
+	
+	@DataProvider
+	public Iterator<Object[]> getTestData(){
+		ArrayList<Object[]> testData = TestDataUtil.getDataFromExcel();
+		return testData.iterator();
+	}
 }
